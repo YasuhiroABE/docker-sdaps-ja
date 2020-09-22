@@ -10,7 +10,7 @@ REGISTRY_LIBRARY = yasuhiroabe
 
 PROD_IMAGE_NAME = $(REGISTRY_SERVER)/$(REGISTRY_LIBRARY)/$(IMAGE_NAME)
 
-.PHONY: all build build-prod tag push run stop check
+.PHONY: all build build-prod tag push run stop check proj1-setup proj2-add-01tif proj2-add-02tif proj2-recognize proj2-report proj2-reporttex proj2-reporttex2 proj2-csv proj2-reset
 
 all:
 	@echo "please specify a target: make [build|build-prod|push|run|stop|check]"
