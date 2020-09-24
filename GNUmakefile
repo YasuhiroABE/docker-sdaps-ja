@@ -33,11 +33,34 @@ run:
 proj1-setup:
 	sudo docker run --rm \
 		-v `pwd`/dev.proj1:/proj \
-		--name $(NAME) \
-                $(DOCKER_IMAGE) \
+                $(PROD_IMAGE_NAME) \
 		setup \
 		--add translator-sdaps-dictionary-English.dict \
-		work/ test.tex
+		work/ example-ja.tex
+
+proj1-add:
+	sudo docker run --rm \
+		-v `pwd`/dev.proj1:/proj \
+                $(PROD_IMAGE_NAME) \
+		add work/ 01.tiff
+
+proj1-recognize:
+	sudo docker run --rm \
+		-v `pwd`/dev.proj1:/proj \
+                $(PROD_IMAGE_NAME) \
+		recognize work/
+
+proj1-reporttex:
+	sudo docker run --rm \
+		-v `pwd`/dev.proj1:/proj \
+                $(PROD_IMAGE_NAME) \
+		report_tex work/
+
+proj1-csv:
+	sudo docker run --rm \
+		-v `pwd`/dev.proj1:/proj \
+                $(PROD_IMAGE_NAME) \
+		csv export work/
 
 proj2-add-01tif:
 	sudo docker run --rm \
@@ -74,7 +97,7 @@ proj2-reporttex:
 		-v `pwd`/dev.proj2:/proj \
 		--name $(NAME) \
                 $(DOCKER_IMAGE) \
-		report_tex 20200310_survey/
+		report_tex --create-tex 20200310_survey/
 
 proj2-reporttex2:
 	sudo docker run --rm \
