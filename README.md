@@ -2,19 +2,19 @@
 README - sdaps-ja
 -----------------
 
-This project contains the Dockerfile which runs the modified sdaps version based on the ubuntu-20.04 package.
+This project contains the Dockerfile, which runs the modified sdaps version based on the ubuntu-20.04 package.
 
-With this docker image, you can easily try out the sdaps command with the Japanese questionnaire.
+With this docker image, you can quickly try out the sdaps command with the Japanese questionnaire.
 
 ## How to run the docker image
 
-Please refer the GNUmakefile file which contains some tasks.
-You can easily learn its usage.
+Please refer to the GNUmakefile file, which contains some real tasks.
+You can quickly learn its usages.
 
-First, please mount the working directory at /proj in the container.
-The questionnaire tex file and project directory will be placed at the /proj directory.
+First, please mount a working directory at /proj in the container.
+Then, place your questionnaire tex file at the working directory.
 
-Detailed instructions (in Japanese) on how to do this can be found on the following web page,
+You can find detailed instructions written in Japanese on the following web page,
 
 * https://qiita.com/YasuhiroABE/items/005da98fc6dc9b3070f2
 
