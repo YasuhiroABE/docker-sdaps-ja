@@ -30,7 +30,10 @@ push:
 run:
 	sudo docker run -it --rm --name $(NAME) $(DOCKER_IMAGE) setup --help
 
+PROJ1_WORKDIR = dev.proj1
+
 proj1-setup:
+	rm -rf $(PROJ1_WORKDIR)/work
 	sudo docker run --rm \
 		-v `pwd`/dev.proj1:/proj \
                 $(PROD_IMAGE_NAME) \
