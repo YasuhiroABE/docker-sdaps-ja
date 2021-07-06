@@ -1,7 +1,7 @@
 
 NAME = sdaps-ja
 DOCKER_IMAGE = sdaps-ja
-DOCKER_IMAGE_VERSION = ub2004-2
+DOCKER_IMAGE_VERSION = ub2004-3
 
 IMAGE_NAME = $(DOCKER_IMAGE):$(DOCKER_IMAGE_VERSION)
 
@@ -16,10 +16,10 @@ all:
 	@echo "please specify a target: make [build|build-prod|push|run|stop|check]"
 
 build:
-	sudo docker build . --tag $(DOCKER_IMAGE)
+	sudo docker build . --tag $(DOCKER_IMAGE) --add-host="archive.ubuntu.com:160.26.2.187"
 
 build-prod:
-	sudo docker build . --tag $(IMAGE_NAME) --no-cache
+	sudo docker build . --tag $(IMAGE_NAME) --no-cache --add-host="archive.ubuntu.com:160.26.2.187"
 
 tag:
 	sudo docker tag $(IMAGE_NAME) $(PROD_IMAGE_NAME)
