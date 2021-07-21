@@ -1,5 +1,5 @@
 
-FROM ubuntu:focal-20210609
+FROM ubuntu:20.10
 
 MAINTAINER YasuhiroABE <yasu-abe@u-aizu.ac.jp>
 
