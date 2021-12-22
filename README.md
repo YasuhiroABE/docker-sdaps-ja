@@ -18,11 +18,36 @@ You can find detailed instructions written in Japanese on the following web page
 
 * https://qiita.com/YasuhiroABE/items/005da98fc6dc9b3070f2
 
+## Getting Started
+
+If you need the root privilege to run the docker command, please replace the "docker" with "sudo docker".
+
+```
+    $ docker pull yasuhiroabe/sdaps-ja:ub2004-4
+    $ mkdir proj
+    $ wget -O proj/example.tex https://gist.githubusercontent.com/YasuhiroABE/db17793accd37b5bbe787597bd503190/raw/sdaps-example-ja.tex
+    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:ub2004-4 setup work/ example.tex
+```
+
+First, printing out the "proj/work/questionnaire.pdf" file, then filling in and scanned it.
+
+Then, place the scanned tiff file as the "proj/01.tiff" file.
+
+```
+    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:ub2004-4 add work/ 01.tiff
+    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:ub2004-4 recognize work/
+    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:ub2004-4 report_tex work/
+    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:ub2004-4 csv export work/
+```
+
+Finally, please check the "proj/work/report_1.pdf" and "proj/work/data_1.csv" files.
+
 ## Copyright
 
-The "files" directory contains the modified sdaps source code these files are distributed under the original copyright.
+The "files" directory contains the modified source code, these files are distributed under the original copyright.
 
 The original SDAPS COPYING file describes as following:
+
 ```
 This program is free software. Different licenses apply to different parts
 of the program.
@@ -39,6 +64,7 @@ please write the authors to clarify the license.
 
 * files/sdapsreport.cls is distributed as the LPPL v1.3c or any later versions.
 * files/*.py files are distributed as the GPL v3 or any later versions.
+* The other files created by YasuhiroABE are distributed as the GPL V3 or any later versions.
 
 ### Diffs of source code
 
