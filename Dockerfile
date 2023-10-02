@@ -1,5 +1,5 @@
 
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 MAINTAINER YasuhiroABE <yasu-abe@u-aizu.ac.jp>
 

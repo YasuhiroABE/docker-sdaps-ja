@@ -22,10 +22,10 @@ all:
 	@echo "please specify a target: make [build|build-prod|push|run|stop|check]"
 
 build:
-	$(DOCKER_CMD) build . --tag $(DOCKER_IMAGE) --add-host="archive.ubuntu.com:160.26.2.187"
+	$(DOCKER_CMD) build . --pull --tag $(DOCKER_IMAGE)
 
 build-prod:
-	$(DOCKER_CMD) build . --tag $(IMAGE_NAME) --no-cache --add-host="archive.ubuntu.com:160.26.2.187"
+	$(DOCKER_CMD) build . --pull --tag $(IMAGE_NAME)
 
 buildx-init:
 	$(DOCKER_CMD) buildx create --name $(DOCKER_BUILDER) --use
