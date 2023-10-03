@@ -3,9 +3,10 @@ FROM ubuntu:22.04
 
 MAINTAINER YasuhiroABE <yasu-abe@u-aizu.ac.jp>
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get upgrade -y \
-	&& DEBIAN_FRONTEND=noninteractive apt-get install -y \
-	file sdaps texlive-lang-cjk texlive-xetex
+RUN apt update && DEBIAN_FRONTEND=noninteractive apt upgrade -y \
+	&& DEBIAN_FRONTEND=noninteractive apt install -y software-properties-common
+RUN add-apt-repository ppa:benjamin-sipsolutions/sdaps
+RUN DEBIAN_FRONTEND=noninteractive apt install -y sdaps texlive-lang-japanese texlive-xetex
 
 ## ommitting the "--no-install-recommends" option.
 
@@ -15,7 +16,6 @@ RUN cp /files/template.py /usr/lib/python3/dist-packages/sdaps/template.py
 RUN cp /files/answers.py /usr/lib/python3/dist-packages/sdaps/report/answers.py
 RUN cp /files/buddies.py /usr/lib/python3/dist-packages/sdaps/report/buddies.py
 RUN cp /files/__init__.py /usr/lib/python3/dist-packages/sdaps/reporttex/__init__.py
-RUN cp /files/sdapsreport.cls /usr/share/sdaps/tex/sdapsreport.cls
 RUN cp /files/latex.py /usr/lib/python3/dist-packages/sdaps/utils/latex.py
 
 WORKDIR /
