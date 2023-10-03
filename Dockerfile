@@ -6,7 +6,7 @@ MAINTAINER YasuhiroABE <yasu-abe@u-aizu.ac.jp>
 RUN apt update && DEBIAN_FRONTEND=noninteractive apt upgrade -y \
 	&& DEBIAN_FRONTEND=noninteractive apt install -y software-properties-common
 RUN add-apt-repository ppa:benjamin-sipsolutions/sdaps
-RUN DEBIAN_FRONTEND=noninteractive apt install -y sdaps texlive-lang-japanese texlive-xetex
+RUN DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends sdaps texlive-lang-japanese texlive-xetex
 
 ## ommitting the "--no-install-recommends" option.
 
