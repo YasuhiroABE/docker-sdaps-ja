@@ -2,13 +2,13 @@
 README - sdaps-ja
 -----------------
 
-This project contains the Dockerfile, which runs the modified sdaps version based on the ubuntu-20.04 package.
+This project contains the Dockerfile, which runs the modified version based on the ubuntu 22.04 sdaps package.
 
 With this docker image, you can quickly try out the sdaps command with the Japanese questionnaire.
 
 ## How to run the docker image
 
-Please refer to the GNUmakefile file, which contains some real tasks.
+Please refer to the Makefile file, which contains some real tasks.
 You can quickly learn its usages.
 
 First, please mount a working directory at /proj in the container.
@@ -23,10 +23,11 @@ You can find detailed instructions written in Japanese on the following web page
 If you need the root privilege to run the docker command, please replace the "docker" with "sudo docker".
 
 ```
-    $ docker pull yasuhiroabe/sdaps-ja:ub2004-4
+    $ docker pull yasuhiroabe/sdaps-ja:latest
+	$ docker tag yasuhiroabe/sdaps-ja:latest sdaps-ja:latest
     $ mkdir proj
     $ wget -O proj/example.tex https://gist.githubusercontent.com/YasuhiroABE/db17793accd37b5bbe787597bd503190/raw/sdaps-example-ja.tex
-    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:ub2004-4 setup work/ example.tex
+    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:latest setup work/ example.tex
 ```
 
 First, printing out the "proj/work/questionnaire.pdf" file, then filling in and scanned it.
@@ -34,13 +35,14 @@ First, printing out the "proj/work/questionnaire.pdf" file, then filling in and 
 Then, place the scanned tiff file as the "proj/01.tiff" file.
 
 ```
-    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:ub2004-4 add work/ 01.tiff
-    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:ub2004-4 recognize work/
-    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:ub2004-4 report_tex work/
-    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:ub2004-4 csv export work/
+    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:latest add work/ 01.tiff
+    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:latest recognize work/
+    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:latest report tex work/
+    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:latest report reportlab work/
+    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:latest export csv work/
 ```
 
-Finally, please check the "proj/work/report_1.pdf" and "proj/work/data_1.csv" files.
+Finally, you will get "proj/work/report_1.pdf", "proj/work/report_2.pdf", and "proj/work/data_1.csv".
 
 ## Copyright
 
@@ -64,14 +66,16 @@ please write the authors to clarify the license.
 
 * files/sdapsreport.cls is distributed as the LPPL v1.3c or any later versions.
 * files/*.py files are distributed as the GPL v3 or any later versions.
-* The other files created by YasuhiroABE are distributed as the GPL V3 or any later versions.
+* The other files created by YasuhiroABE are distributed under the GPL v3.
 
-### Diffs of source code
+### Patch
+
+The following shows the diff output of source code.
 
 ```
---- /usr/lib/python3/dist-packages/sdaps/defs.py.20200925	2018-11-06 05:23:27.000000000 +0900
-+++ /usr/lib/python3/dist-packages/sdaps/defs.py	2020-09-25 10:53:18.604513503 +0900
-@@ -194,7 +194,7 @@
+--- /usr/lib/python3/dist-packages/sdaps/defs.py.20231003	2023-10-03 15:31:19.832496753 +0900
++++ /usr/lib/python3/dist-packages/sdaps/defs.py	2023-10-03 16:47:58.047769679 +0900
+@@ -197,7 +197,7 @@
  
  # External commands =======================================
  #: The binary used to compile latex documents.
@@ -80,8 +84,8 @@ please write the authors to clarify the license.
  
  #: A function that is called after fork and before exec of the latex engine.
  #: This is useful when e.g. the LateX environment should be secured.
---- /usr/lib/python3/dist-packages/sdaps/template.py.20200925	2018-11-03 20:13:21.000000000 +0900
-+++ /usr/lib/python3/dist-packages/sdaps/template.py	2020-09-25 10:53:18.604513503 +0900
+--- /usr/lib/python3/dist-packages/sdaps/template.py.20231003	2023-07-23 21:35:38.000000000 +0900
++++ /usr/lib/python3/dist-packages/sdaps/template.py	2023-10-03 16:47:58.059769628 +0900
 @@ -25,6 +25,8 @@
  """
  
@@ -118,8 +122,8 @@ please write the authors to clarify the license.
      fontSize=10,
      leading=14,
  )
---- /usr/lib/python3/dist-packages/sdaps/report/answers.py.20200925	2018-11-03 20:13:21.000000000 +0900
-+++ /usr/lib/python3/dist-packages/sdaps/report/answers.py	2020-09-25 10:53:18.608517502 +0900
+--- /usr/lib/python3/dist-packages/sdaps/report/answers.py.20231003	2023-07-23 21:35:38.000000000 +0900
++++ /usr/lib/python3/dist-packages/sdaps/report/answers.py	2023-10-03 16:47:58.071769578 +0900
 @@ -21,6 +21,8 @@
  
  from reportlab import pdfgen
@@ -162,8 +166,8 @@ please write the authors to clarify the license.
          # mean
          mean = flowables.Box(self.mean_width, self.mean_height, self.box_depth)
          mean.transparent = 0
---- /usr/lib/python3/dist-packages/sdaps/report/buddies.py.20200925	2018-11-21 06:26:40.000000000 +0900
-+++ /usr/lib/python3/dist-packages/sdaps/report/buddies.py	2020-09-25 10:53:18.612521500 +0900
+--- /usr/lib/python3/dist-packages/sdaps/report/buddies.py.20231003	2023-07-23 21:35:38.000000000 +0900
++++ /usr/lib/python3/dist-packages/sdaps/report/buddies.py	2023-10-03 16:47:58.083769529 +0900
 @@ -19,6 +19,8 @@
  import math
  
@@ -197,8 +201,8 @@ please write the authors to clarify the license.
  )
  
  
---- /usr/lib/python3/dist-packages/sdaps/reporttex/__init__.py.20200925	2019-01-26 21:54:01.000000000 +0900
-+++ /usr/lib/python3/dist-packages/sdaps/reporttex/__init__.py	2020-09-25 10:53:18.616525499 +0900
+--- /usr/lib/python3/dist-packages/sdaps/reporttex/__init__.py.20231003	2023-07-23 21:35:38.000000000 +0900
++++ /usr/lib/python3/dist-packages/sdaps/reporttex/__init__.py	2023-10-03 16:47:58.091769494 +0900
 @@ -124,6 +124,12 @@
      \fi
      \usepackage[%(language)s]{babel}
@@ -212,27 +216,16 @@ please write the authors to clarify the license.
      \title{%(title)s}
      \subject{%(title)s}
      \author{%(author)s}
---- /usr/share/sdaps/tex/sdapsreport.cls.20200925	2018-11-03 20:13:21.000000000 +0900
-+++ /usr/share/sdaps/tex/sdapsreport.cls	2020-09-25 10:53:18.616525499 +0900
-@@ -38,7 +38,7 @@
- %-------------------------------------------------------------------------------
- % load base-class
- %-------------------------------------------------------------------------------
--\LoadClass[twoside,headings=small]{scrreprt}
-+\LoadClass[oneside,headings=small]{scrreprt}
- 
- 
- %-------------------------------------------------------------------------------
---- /usr/lib/python3/dist-packages/sdaps/utils/latex.py.20200925	2019-01-26 21:51:48.000000000 +0900
-+++ /usr/lib/python3/dist-packages/sdaps/utils/latex.py	2020-09-25 10:53:18.620529498 +0900
-@@ -64,7 +64,7 @@
+--- /usr/lib/python3/dist-packages/sdaps/utils/latex.py.20231003	2023-07-23 21:35:38.000000000 +0900
++++ /usr/lib/python3/dist-packages/sdaps/utils/latex.py	2023-10-03 16:47:58.103769444 +0900
+@@ -68,7 +68,7 @@
      # needed anyway.
      # However, it could also mean that the mapping needs to be updated.
      try:
 -        string.encode('ascii')
 +        string.encode('utf-8')
      except UnicodeEncodeError:
-         log.warn(_("Generated string for LaTeX contains unicode characters. This may not work correctly and could mean the LaTeX character map needs to be updated."))
-     return string
-```
+         global warned_mapping
+         if not warned_mapping:
 
+```
