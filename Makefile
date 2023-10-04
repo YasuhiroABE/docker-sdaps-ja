@@ -49,9 +49,55 @@ tag:
 push:
 	$(DOCKER_CMD) push $(PROD_IMAGE_NAME)
 
-.PHONY: run
-run:
-	$(DOCKER_CMD) run -it --rm --name $(NAME) $(DOCKER_IMAGE) setup --help
+proj/example.tex:
+	mkdir -p proj
+	chmod a+rwX,g+s proj
+	wget -O proj/example.tex https://gist.githubusercontent.com/YasuhiroABE/db17793accd37b5bbe787597bd503190/raw/sdaps-example-ja.tex
+
+.PHONY: sdaps-setup
+sdaps-setup: proj/example.tex
+	$(DOCKER_CMD) run -it --rm --name $(NAME) \
+		-v `pwd`/proj:/proj \
+		$(IMAGE_NAME) setup tex work example.tex
+
+proj/01.tiff:
+	@echo "Please placed the scanned sheet as proj/01.tiff"
+
+PHONY: sdaps-add
+sdaps-add: proj/01.tiff
+	$(DOCKER_CMD) run -it --rm --name $(NAME) \
+		-v `pwd`/proj:/proj \
+		$(IMAGE_NAME) add work 01.tiff
+
+PHONY: sdaps-recognize
+sdaps-recognize:
+	$(DOCKER_CMD) run -it --rm --name $(NAME) \
+		-v `pwd`/proj:/proj \
+		$(IMAGE_NAME) recognize work
+
+PHONY: sdaps-report-tex
+sdaps-report-tex:
+	$(DOCKER_CMD) run -it --rm --name $(NAME) \
+		-v `pwd`/proj:/proj \
+		$(IMAGE_NAME) report tex work
+
+PHONY: sdaps-report-reportlab
+sdaps-report-reportlab:
+	$(DOCKER_CMD) run -it --rm --name $(NAME) \
+		-v `pwd`/proj:/proj \
+		$(IMAGE_NAME) report reportlab work
+
+PHONY: sdaps-csv
+sdaps-csv:
+	$(DOCKER_CMD) run -it --rm --name $(NAME) \
+		-v `pwd`/proj:/proj \
+		$(IMAGE_NAME) export csv work
+
+PHONY: sdaps-reset
+sdaps-reset:
+	$(DOCKER_CMD) run -it --rm --name $(NAME) \
+		-v `pwd`/proj:/proj \
+		$(IMAGE_NAME) reset work
 
 .PHONY: check
 check:
