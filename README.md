@@ -24,10 +24,10 @@ If you need the root privilege to run the docker command, please replace the "do
 
 ```
     $ docker pull yasuhiroabe/sdaps-ja:latest
-	$ docker tag yasuhiroabe/sdaps-ja:latest sdaps-ja:latest
+    $ docker tag yasuhiroabe/sdaps-ja:latest sdaps-ja:latest
     $ mkdir proj
     $ wget -O proj/example.tex https://gist.githubusercontent.com/YasuhiroABE/db17793accd37b5bbe787597bd503190/raw/sdaps-example-ja.tex
-    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:latest setup work/ example.tex
+    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:latest setup tex work/ example.tex
 ```
 
 First, printing out the "proj/work/questionnaire.pdf" file, then filling in and scanned it.
