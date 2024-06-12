@@ -1,6 +1,6 @@
 
 ## If you need the root privilege, then use the "sudo docker" command instead.
-DOCKER_CMD = docker
+DOCKER_CMD = podman
 DOCKER_BUILDER = mabuilder
 
 ## Please change your docker account name
