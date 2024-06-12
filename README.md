@@ -2,39 +2,40 @@
 README - sdaps-ja
 -----------------
 
-This project contains the Dockerfile, which runs the modified version based on the ubuntu 22.04 sdaps package.
+This project contains the Dockerfile, which runs the modified version of the ppa sdaps package based on the Ubuntu 22.04.
 
-With this docker image, you can quickly try out the sdaps command with the Japanese questionnaire.
+This Docker image allows you to easily use the SDAPS command with a Japanese questionnaire.
 
 ## How to run the docker image
 
-Please refer to the Makefile file, which contains some real tasks.
-You can quickly learn its usages.
+Refer to the Makefile for real tasks examples.
 
-First, please mount a working directory at /proj in the container.
-Then, place your questionnaire tex file at the working directory.
+### Overview
 
-You can find detailed instructions written in Japanese on the following web page,
+* Mount a working directory at "/proj" in the container.
+* Place your questionnaire TeX file in the working directory.
+* Detailed instructions written in Japanese are available here, [qiita.com my article](https://qiita.com/YasuhiroABE/items/005da98fc6dc9b3070f2).
 
-* https://qiita.com/YasuhiroABE/items/005da98fc6dc9b3070f2
-
-## Getting Started
+### Generate Questionnaire PDF
 
 If you need the root privilege to run the docker command, please replace the "docker" with "sudo docker".
 
-```
+```bash
     $ docker pull yasuhiroabe/sdaps-ja:latest
     $ docker tag yasuhiroabe/sdaps-ja:latest sdaps-ja:latest
     $ mkdir proj
     $ wget -O proj/example.tex https://gist.githubusercontent.com/YasuhiroABE/db17793accd37b5bbe787597bd503190/raw/sdaps-example-ja.tex
     $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:latest setup tex work/ example.tex
-```
-
-First, printing out the "proj/work/questionnaire.pdf" file, then filling in and scanned it.
-
-Then, place the scanned tiff file as the "proj/01.tiff" file.
 
 ```
+
+Print out the "proj/work/questionnaire.pdf" file, then filling in and scanned it.
+
+### Process the scanned file
+
+Place the scanned tiff file as the "proj/01.tiff" file.
+
+```bash
     $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:latest add work/ 01.tiff
     $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:latest recognize work/
     $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:latest report tex work/
@@ -66,7 +67,7 @@ please write the authors to clarify the license.
 
 * files/sdapsreport.cls is distributed as the LPPL v1.3c or any later versions.
 * files/*.py files are distributed as the GPL v3 or any later versions.
-* The other files created by YasuhiroABE are distributed under the GPL v3.
+* The other files created by YasuhiroABE are distributed under the GPL v3 or any later versions as well as the original sdaps code.
 
 ### Patch
 
