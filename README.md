@@ -2,23 +2,23 @@
 README - sdaps-ja
 -----------------
 
-This project contains the Dockerfile, which runs the modified version of the ppa sdaps package based on the Ubuntu 22.04.
+This project contains a Dockerfile that runs a modified version of the PPA SDAPS package based on Ubuntu 22.04.
 
 This Docker image allows you to easily use the SDAPS command with a Japanese questionnaire.
 
-## How to run the docker image
+## How to Run the Docker Image
 
-Refer to the Makefile for real tasks examples.
+For real tasks examples, refer to the Makefile.
 
 ### Overview
 
-* Mount a working directory at "/proj" in the container.
+* Mount a working directory at ``/proj`` in the container.
 * Place your questionnaire TeX file in the working directory.
-* Detailed instructions written in Japanese are available here, [qiita.com my article](https://qiita.com/YasuhiroABE/items/005da98fc6dc9b3070f2).
+* Detailed instructions in Japanese are available in [my Qiita article](https://qiita.com/YasuhiroABE/items/005da98fc6dc9b3070f2).
 
 ### Generate Questionnaire PDF
 
-If you need the root privilege to run the docker command, please replace the "docker" with "sudo docker".
+If you need root privileges to run the Docker commands, please replace the ``docker`` with ``sudo docker``.
 
 ```bash
     $ docker pull yasuhiroabe/sdaps-ja:latest
@@ -29,21 +29,21 @@ If you need the root privilege to run the docker command, please replace the "do
 
 ```
 
-Print out the "proj/work/questionnaire.pdf" file, then filling in and scanned it.
+Print out the "proj/work/questionnaire.pdf" file, fill it in, and scan it.
 
-### Process the scanned file
+### Process the Scanned File
 
-Place the scanned tiff file as the "proj/01.tiff" file.
+Place the scanned TIFF file as ``proj/01.tiff``.
 
 ```bash
     $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:latest add work/ 01.tiff
     $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:latest recognize work/
-    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:latest report tex work/
-    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:latest report reportlab work/
-    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:latest export csv work/
+    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:latest report tex work/        ## report_1.pdf
+    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:latest report reportlab work/  ## report_2.pdf
+    $ docker run --rm -v `pwd`/proj:/proj sdaps-ja:latest export csv work/        ## data_1.csv
 ```
 
-Finally, you will get "proj/work/report_1.pdf", "proj/work/report_2.pdf", and "proj/work/data_1.csv".
+Finally, you will obtain ``proj/work/report_1.pdf``, ``proj/work/report_2.pdf``, and ``proj/work/data_1.csv``.
 
 ## Copyright
 
