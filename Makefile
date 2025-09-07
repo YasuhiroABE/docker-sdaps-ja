@@ -9,7 +9,7 @@ REGISTRY_SERVER = docker.io
 
 NAME = sdaps-ja
 DOCKER_IMAGE = sdaps-ja
-DOCKER_IMAGE_VERSION = latest
+DOCKER_IMAGE_VERSION = ub2404.20250906
 
 ## Note: Following sections are not intended to change.
 
@@ -22,7 +22,7 @@ all:
 
 .PHONY: build
 build:
-	$(DOCKER_CMD) build . --pull --tag $(DOCKER_IMAGE)
+	$(DOCKER_CMD) build . --tag $(DOCKER_IMAGE)
 
 .PHONY: build-prod
 build-prod:
@@ -67,7 +67,7 @@ PHONY: sdaps-add
 sdaps-add: proj/01.tiff
 	$(DOCKER_CMD) run -it --rm --name $(NAME) \
 		-v `pwd`/proj:/proj \
-		$(IMAGE_NAME) add work 01.tiff
+		$(IMAGE_NAME) add --convert work 01.tiff
 
 PHONY: sdaps-recognize
 sdaps-recognize:
