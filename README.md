@@ -2,7 +2,7 @@
 README - sdaps-ja
 -----------------
 
-This project contains a Dockerfile that runs a modified version of the PPA SDAPS package based on Ubuntu 22.04.
+This project contains a Dockerfile that runs a modified version of the PPA SDAPS package based on Ubuntu 24.04.
 
 This Docker image allows you to easily use the SDAPS command with a Japanese questionnaire.
 
