@@ -1,12 +1,12 @@
 
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 MAINTAINER YasuhiroABE <yasu-abe@u-aizu.ac.jp>
 
 RUN apt update && DEBIAN_FRONTEND=noninteractive apt upgrade -y \
 	&& DEBIAN_FRONTEND=noninteractive apt install -y software-properties-common
 RUN add-apt-repository ppa:benjamin-sipsolutions/sdaps
-RUN DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends file sdaps texlive-lang-japanese texlive-xetex
+RUN DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends file sdaps texlive-lang-japanese texlive-xetex fonts-ipafont fonts-ipaexfont fonts-takao
 
 ## ommitting the "--no-install-recommends" option.
 
