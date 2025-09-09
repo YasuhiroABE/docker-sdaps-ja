@@ -1,7 +1,8 @@
 
 FROM ubuntu:24.04
 
-MAINTAINER YasuhiroABE <yasu-abe@u-aizu.ac.jp>
+LABEL org.opencontainers.image.authors="Yasuhiro ABE <yasu-abe@u-aizu.ac.jp>"
+LABEL org.opencontainers.image.licenses="GPL-3.0-or-later AND LicenseRef-CustomLicenses"
 
 RUN apt update && DEBIAN_FRONTEND=noninteractive apt upgrade -y \
 	&& DEBIAN_FRONTEND=noninteractive apt install -y software-properties-common
@@ -20,7 +21,8 @@ RUN cp /files/latex.py /usr/lib/python3/dist-packages/sdaps/utils/latex.py
 
 WORKDIR /
 
-ENV WORKING_DIR /proj
+ENV WORKING_DIR=/proj
+
 RUN mkdir $WORKING_DIR
 VOLUME $WORKING_DIR
 
