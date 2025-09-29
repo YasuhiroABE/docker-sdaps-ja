@@ -1,5 +1,5 @@
 
-FROM ubuntu:24.04
+FROM ubuntu:24.10
 
 LABEL org.opencontainers.image.authors="Yasuhiro ABE <yasu-abe@u-aizu.ac.jp>"
 LABEL org.opencontainers.image.licenses="GPL-3.0-or-later AND LicenseRef-CustomLicenses"
